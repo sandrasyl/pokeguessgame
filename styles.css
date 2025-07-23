@@ -1,0 +1,389 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #ff6b6b, #6f94c8); 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  overflow-y: auto;
+}
+
+.container {
+  background: rgba(255, 255, 255, 0.85);
+  padding: 2rem;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  text-align: center;
+  max-width: 500px;
+  width: 90%;
+  margin: 1rem;
+  position: relative;
+  overflow: hidden;
+}
+
+h1 {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 1.8rem;
+  color: #2b2d42;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  margin-bottom: 1.5rem;
+  letter-spacing: 1px;
+}
+
+.pokemon-container {
+  position: relative;
+  margin: 1.5rem 0;
+  padding: 1rem;
+  background: #f5f5f5;
+  border-radius: 15px;
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px; 
+}
+
+#pokemon-image {
+  width: 180px;
+  height: 180px;
+  display: none; 
+  filter: brightness(0);
+  transition: filter 0.5s ease, transform 0.3s ease;
+  z-index: 2;
+}
+
+#pokemon-image.revealed {
+  filter: brightness(1);
+  transform: scale(1.1);
+}
+
+.loader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40px;
+  height: 40px;
+  border: 4px solid #ccc;
+  border-top: 4px solid #333;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  z-index: 1;
+}
+
+@keyframes spin {
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+#guess-form {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+input {
+  padding: 0.8rem;
+  font-size: 1rem;
+  border: 2px solid #3b4cca; 
+  border-radius: 10px;
+  outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  width: 60%;
+}
+
+input:focus {
+  border-color: #ffcb05; 
+  box-shadow: 0 0 8px rgba(255, 203, 5, 0.5);
+}
+
+button {
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  background: linear-gradient(45deg, #ff0000, #ff4d4d); 
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+#hint-button {
+  margin-top: 7px;
+  background: linear-gradient(45deg, #3b4cca, #6b7280); 
+}
+
+#message {
+  font-size: 1.1rem;
+  color: #2b2d42;
+  margin: 1rem 0;
+  min-height: 1.5em; 
+}
+
+#score {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #ff0000;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 0.5rem;
+  border-radius: 8px;
+}
+
+/* Animaciones */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-8px); }
+  75% { transform: translateX(8px); }
+}
+
+.shake {
+  animation: shake 0.3s ease-in-out;
+}
+
+@keyframes flash {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(1.05); }
+}
+
+.flash {
+  animation: flash 0.5s ease-in-out;
+}
+
+#result-message {
+  margin-bottom: 16px; 
+  font-weight: bold;
+  color: green; 
+  font-size: 1.1rem;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .container {
+    padding: 1.5rem;
+  }
+
+  h1 {
+    font-size: 1.4rem;
+  }
+
+  #pokemon-image {
+    width: 150px;
+    height: 150px;
+  }
+
+  input {
+    width: 70%;
+    font-size: 0.9rem;
+  }
+
+  button {
+    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
+  }
+}
+
+#give-up-button {
+  margin-top: 1rem;
+  background: #ff0000;
+  color: white;
+  padding: 0.7rem 1.3rem;
+  border-radius: 10px;
+  font-weight: 600;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+#give-up-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Pantalla inicial dificultad */
+#difficulty-screen {
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  transition: opacity 0.5s ease;
+}
+
+#difficulty-screen h2 {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 1.2rem;
+  color: #2b2d42;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.15);
+  margin-bottom: 1rem;
+}
+
+#difficulty-screen button {
+  background: linear-gradient(45deg, #ff0000, #ff4d4d);
+  color: white;
+  font-weight: 600;
+  border-radius: 10px;
+  border: none;
+  padding: 1rem 1.5rem;
+  font-size: 1rem;
+  margin-top: 1rem;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  width: 100%;
+  max-width: 250px;
+  align-self: center;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+#difficulty-screen button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.3);
+}
+
+/* Animación de salida para pantalla dificultad hacia abajo */
+#difficulty-screen.fade-out {
+  animation: fadeSlideDown 0.6s forwards;
+}
+
+@keyframes fadeSlideDown {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+}
+
+.fade-out {
+  animation: fadeOut 0.5s forwards;
+}
+
+.fade-in {
+  animation: fadeIn 0.5s forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.gen-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    max-width: 100%;
+    margin: 1rem auto;
+}
+
+.gen-card {
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.gen-card:hover {
+    transform: scale(1.04);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.3);
+}
+
+.gen-card input[type="checkbox"]:checked {
+    transform: scale(1.04);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.3);
+}
+
+.gen-overlay {
+    background: rgba(0, 0, 0, 0.6);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s ease, border-color 0.2s ease;
+    border: 4px solid transparent;
+}
+
+.gen-card:hover .gen-overlay {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.gen-card input[type="checkbox"] {
+    display: none;
+}
+
+.gen-card input[type="checkbox"]:checked + .gen-overlay {
+    background: rgba(196, 162, 51, 0.4);
+    border: 4px solid #f8e300;
+    border-radius: 10px;
+}
+
+.gen-card label {
+    font-family: 'Press Start 2P', cursive;
+    color: white;
+    font-size: 0.8rem;
+    text-align: center;
+    padding: 0.5rem;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-shadow: 0 2px 3px rgba(0, 0, 0, 0.55);
+}
+
+.back-button {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  padding: 0.6rem 0.9rem;
+  font-size: 1.2rem;
+  font-family: 'Press Start 2P', cursive;
+  background: linear-gradient(45deg, #ff0000, #ff4d4d); 
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: box-shadow 0.2s ease;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+}
+
+.back-button:hover {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 480px) {
+  .back-button {
+    padding: 0.5rem 0.7rem;
+    font-size: 1rem;
+    width: 35px;
+    height: 35px;
+  }
+}

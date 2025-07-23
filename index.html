@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Adivina el Pokémon</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Adivina el Pokémon</h1>
+
+    <div id="generation-screen">
+      <form id="generation-form">
+        <h2>Selecciona la generación:</h2>
+        <div class="gen-grid">
+          <!-- Generación I -->
+          <div class="gen-card" style="background-image: url('/images/kanto.webp');">
+            <input type="checkbox" name="gen" value="1" id="gen1">
+            <label for="gen1" class="gen-overlay">Kanto (Gen I)</label>
+          </div>
+          <!-- Generación II -->
+          <div class="gen-card" style="background-image: url('images/johto.webp');">
+            <input type="checkbox" name="gen" value="2" id="gen2">
+            <label for="gen2" class="gen-overlay">Johto (Gen II)</label>
+          </div>
+          <!-- Generación III -->
+          <div class="gen-card" style="background-image: url('images/hoenn.webp');">
+            <input type="checkbox" name="gen" value="3" id="gen3">
+            <label for="gen3" class="gen-overlay">Hoenn (Gen III)</label>
+          </div>
+          <!-- Generación IV -->
+          <div class="gen-card" style="background-image: url('images/Sinnoh.webp');">
+            <input type="checkbox" name="gen" value="4" id="gen4">
+            <label for="gen4" class="gen-overlay">Sinnoh (Gen IV)</label>
+          </div>
+          <!-- Generación V -->
+          <div class="gen-card" style="background-image: url('images/unova.webp');">
+            <input type="checkbox" name="gen" value="5" id="gen5">
+            <label for="gen5" class="gen-overlay">Unova (Gen V)</label>
+          </div>
+          <!-- Generación VI -->
+          <div class="gen-card" style="background-image: url('images/kalos.webp');">
+            <input type="checkbox" name="gen" value="6" id="gen6">
+            <label for="gen6" class="gen-overlay">Kalos (Gen VI)</label>
+          </div>
+          <!-- Generación VII -->
+          <div class="gen-card" style="background-image: url('images/alola.webp');">
+            <input type="checkbox" name="gen" value="7" id="gen7">
+            <label for="gen7" class="gen-overlay">Alola (Gen VII)</label>
+          </div>
+          <!-- Generación VIII -->
+          <div class="gen-card" style="background-image: url('images/galar.webp');">
+            <input type="checkbox" name="gen" value="8" id="gen8">
+            <label for="gen8" class="gen-overlay">Galar (Gen VIII)</label>
+          </div>
+          <!-- Generación IX -->
+          <div class="gen-card" style="background-image: url('images/paldea.webp');">
+            <input type="checkbox" name="gen" value="9" id="gen9">
+            <label for="gen9" class="gen-overlay">Paldea (Gen IX)</label>
+          </div>
+        </div>
+        <button id="confirm-generations-button" type="submit">
+          Continuar
+        </button>
+      </form>
+    </div>  
+
+    <div id="difficulty-screen" style="display:none;">
+      <h2>Elige dificultad</h2>
+      <button id="easy-button">Fácil (pistas ilimitadas)</button>
+      <button id="hard-button">Difícil (máx. 3 pistas)</button>
+    </div>
+
+    <div id="game-container" style="display:none;">
+      <button id="back-to-start-button" class="back-button">←</button>
+      <div class="pokemon-container">
+        <div id="loader" class="loader"></div>
+        <img id="pokemon-image" src="" alt="Pokémon Silueta">
+      </div>
+      <form id="guess-form">
+        <input type="text" id="guess-input" placeholder="Nombre del Pokémon" autocomplete="off">
+        <button type="submit">Adivinar</button>
+      </form>
+      <button id="hint-button">Pista</button>
+      <p id="message"></p>
+      <p id="hint-info"></p>
+      <p id="result-message"></p>
+      <p id="score">Aciertos: 0</p>
+      <button id="give-up-button">Rendirse</button>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
